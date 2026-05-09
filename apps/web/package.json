@@ -1,0 +1,21 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "NODE_OPTIONS=--no-warnings next dev --webpack",
+    "build": "NODE_OPTIONS=--no-warnings next build --webpack",
+    "start": "NODE_OPTIONS=--no-warnings next start",
+    "test": "NODE_OPTIONS=--no-warnings vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@saas-school/core": "workspace:*",
+    "lucide-react": "^1.14.0",
+    "next": "^16.2.6",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  }
+}

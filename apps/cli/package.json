@@ -1,0 +1,20 @@
+{
+  "name": "cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "saas-school": "src/index.ts"
+  },
+  "scripts": {
+    "build": "pnpm --filter @saas-school/core build && tsc",
+    "start": "pnpm run build && NODE_OPTIONS=--no-warnings node dist/index.js",
+    "test": "NODE_OPTIONS=--no-warnings vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@saas-school/core": "workspace:*",
+    "commander": "^14.0.0"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "saas-school",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.11.0",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter @saas-school/core build && pnpm --filter cli build && pnpm --filter web build",
+    "cli": "pnpm --filter cli start",
+    "seed": "pnpm --filter cli start seed",
+    "reset": "pnpm --filter cli start reset",
+    "test": "pnpm -r test",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.18",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.3"
+  }
+}
