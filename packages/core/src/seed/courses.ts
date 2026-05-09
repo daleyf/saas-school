@@ -1,4 +1,5 @@
 import type { Course, Lesson, Module, QuizQuestion } from "../types.js";
+import { additionalCourses, additionalLessons, additionalModules, additionalQuizQuestions } from "./moreCourses.js";
 
 export const courses: Course[] = [
   {
@@ -9,7 +10,8 @@ export const courses: Course[] = [
     level: "beginner",
     estimatedMinutes: 45,
     moduleIds: ["module-saas-basics", "module-saas-mvp-stack"]
-  }
+  },
+  ...additionalCourses
 ];
 
 export const modules: Module[] = [
@@ -32,7 +34,8 @@ export const modules: Module[] = [
     description: "Use boring, proven tools so you can ship faster.",
     order: 2,
     lessonIds: ["lesson-default-mvp-stack", "lesson-avoid-overengineering"]
-  }
+  },
+  ...additionalModules
 ];
 
 export const lessons: Lesson[] = [
@@ -245,7 +248,8 @@ You do not need Kubernetes, event streaming, a custom auth system, and five serv
 ## Common mistake
 
 Architecture can become a way to avoid launch risk. A finished simple product teaches more than an unfinished perfect system.`
-  }
+  },
+  ...additionalLessons
 ];
 
 export const quizQuestions: QuizQuestion[] = [
@@ -488,5 +492,6 @@ export const quizQuestions: QuizQuestion[] = [
     sourceIds: ["yc-startup-school"],
     difficulty: "medium",
     topicTags: ["startup", "mvp", "overengineering"]
-  }
+  },
+  ...additionalQuizQuestions
 ];

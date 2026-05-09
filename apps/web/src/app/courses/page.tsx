@@ -16,7 +16,7 @@ export default async function CoursesPage() {
     <div className="page">
       <p className="eyebrow">Courses</p>
       <h1>Learning tracks</h1>
-      <p className="lead">Start with the one complete MVP course and build stack literacy through quizzes.</p>
+      <p className="lead">Build stack literacy across deployment, databases, payments, and launch fundamentals.</p>
       <div className="grid two section">
         {courses.map((item) => (
           <CourseCard key={item.course.id} course={item.course} progress={item.progress} />

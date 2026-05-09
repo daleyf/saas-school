@@ -17,6 +17,14 @@ export function recommendStack(params: { idea: string; now?: Date }): StackRecom
   const isB2b = traits.includes("b2b");
   const isDashboard = traits.includes("dashboard");
   const generatedAt = (params.now ?? new Date()).toISOString();
+  const learningPathLessonIds = buildLearningPath({
+    isMarketplace,
+    isMobile,
+    isAi,
+    isB2b,
+    isDashboard,
+    hasSubscription: traits.includes("subscription")
+  });
 
   const recommendation: StackRecommendation = {
     id: `rec-${slugify(idea).slice(0, 40)}-${Date.parse(generatedAt)}`,
@@ -98,13 +106,7 @@ export function recommendStack(params: { idea: string; now?: Date }): StackRecom
       ...(isMobile ? ["Native mobile app before proving the web loop"] : []),
       ...(isRealtime ? ["Realtime infrastructure for features that do not need live updates"] : [])
     ],
-    learningPathLessonIds: [
-      "lesson-saas-stack-overview",
-      "lesson-frontend-backend-database",
-      "lesson-auth-payments-analytics",
-      "lesson-default-mvp-stack",
-      "lesson-avoid-overengineering"
-    ],
+    learningPathLessonIds,
     generatedAt
   };
 
@@ -127,4 +129,43 @@ function slugify(value: string) {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+}
+
+function buildLearningPath(params: {
+  isMarketplace: boolean;
+  isMobile: boolean;
+  isAi: boolean;
+  isB2b: boolean;
+  isDashboard: boolean;
+  hasSubscription: boolean;
+}) {
+  const path = [
+    "lesson-saas-stack-overview",
+    "lesson-default-mvp-stack",
+    "lesson-frontend-backend-database",
+    "lesson-why-apps-need-databases",
+    "lesson-modeling-saas-data",
+    "lesson-what-deployment-means",
+    "lesson-env-vars-secrets",
+    "lesson-auth-payments-analytics"
+  ];
+
+  if (params.hasSubscription || params.isMarketplace) {
+    path.push("lesson-stripe-checkout-vs-billing", "lesson-webhooks-subscription-state", "lesson-pricing-tiers");
+  }
+
+  if (params.isDashboard || params.isB2b) {
+    path.push("lesson-sql-vs-nosql-postgres", "lesson-migrations-rls");
+  }
+
+  if (params.isMobile) {
+    path.push("lesson-vercel-render-railway");
+  }
+
+  if (params.isAi) {
+    path.push("lesson-launch-measure-iterate");
+  }
+
+  path.push("lesson-plan-an-mvp", "lesson-talk-to-users", "lesson-landing-pages-pricing", "lesson-avoid-overengineering");
+  return [...new Set(path)];
 }
